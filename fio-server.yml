@@ -1,0 +1,8 @@
+- name: Deploy FIO Load-Generation server
+  hosts: all
+  become: True
+  roles:
+    - import_role:
+        name: common 
+    - import_role:
+      name: fioserver

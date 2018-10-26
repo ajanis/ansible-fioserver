@@ -1,0 +1,6 @@
+---
+fio_required_pkgs:
+  - zlib1g-dev
+  - libnuma-dev
+  - librbd-dev 
+  - libaio-dev

@@ -1,0 +1,39 @@
+---
+- name: include os specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
+- name: install fio requirements
+  package: 
+    name: "{{ item }}" 
+    state: latest
+    update_cache: yes
+  with_items: "{{ fio_required_pkgs }}"
+
+- name: clone github repo
+  git:
+    repo: https://github.com/axboe/fio.git
+    dest: /srv/fio
+    update: yes
+  register: fio_repo_updated
+
+- name: build fio
+  command: './configure --prefix=/usr'
+  args:
+    chdir: /srv/fio
+  when: fio_repo_updated
+
+- name: make fio
+  command: make
+  args:
+    chdir: /srv/fio
+  when: fio_repo_updated
+
+- name: install fio
+  command: make install
+  args:
+    chdir: /srv/fio
+  when: fio_repo_updated

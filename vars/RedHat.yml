@@ -1,0 +1,6 @@
+---
+fio_required_pkgs:
+  - zlib-devel
+  - numactl-devel
+  - librbd1-devel
+  - libaio-devel
