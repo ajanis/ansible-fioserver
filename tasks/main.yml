@@ -8,10 +8,9 @@
 
 - name: install fio requirements
   package: 
-    name: "{{ item }}" 
+    name: "{{ fio_required_pkgs }}" 
     state: latest
     update_cache: yes
-  with_items: "{{ fio_required_pkgs }}"
 
 - name: clone github repo
   git:
