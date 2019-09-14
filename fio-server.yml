@@ -2,7 +2,7 @@
   hosts: all
   become: True
   roles:
-    - import_role:
+    - include_role:
         name: common 
-    - import_role:
-      name: fioserver
+    - include_role:
+        name: fioserver
